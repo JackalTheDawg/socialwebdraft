@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FamilySharing - login or sign up</title>
+    <link href='{% static "/css/style.css" %}'  type="text/css" rel="stylesheet">
+</head>
+<body>
+        <div id="modal" class="modal">
+        <div id="new_account">
+            <p> Create your account, it`s simply!</p>
+            <p1> Enter the next information about you: </p1>
+            <form class="new_form" method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ user_form }}
+                {{ registration_form }}
+                <button id="create_new_account" type="submit">Create</button>
+            </form>
+        <a href="#close" title="Close" class="close">x</a>
+        </div>
+    </div>
+    <div class="sign_in_block">
+        <div class="logo_block">
+            <h1 id="logo"> Draft </h1>
+            <p id="tagline"> slogan </p>
+        </div>
+        <div class="login_block">
+            <form class="" action="" method="post">
+                {% csrf_token %}
+                {{ sign_in_form }}
+                <button id="login_btn" type="submit">Log in</button>
+            </form>
+            <a id="forgot_password" href="">Forgot password?</a>
+            <form class="" action="#modal" method="get">
+                <button id="create_account">Create new account</button>
+            </form>
+        </div>
+    </div>
+        </div>
+</body>
+</html>

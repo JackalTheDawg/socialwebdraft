@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+{% load thumbnail %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href='{% static "/css/chat.css" %}' type="text/css" rel="stylesheet">
+</head>
+<body>
+    <div class="frame">
+        <div class="header">
+            <form class="log_out" action="{% url 'exit' %}">
+                <button type="submit" class="log_out_button">log out</button>
+            </form>
+            <div class="logo">
+                <a href="{% url 'my_page' %}">
+                    <p> Draft </p>
+                </a>
+            </div>
+        </div>
+        <div class="panel">
+            {% if chats.count == 0 %}
+                <form method="get" action="{% url 'search_page' %}">
+                    <a> You haven`t any dialog`s here. Want to start it?</a>
+                           <button> Start chat </button>
+                </form>
+            {% else %}
+                {% for chat_id, user in chat_lists.items %}
+                {% thumbnail user.profile_picture "90x90" crop="center" upscale=True as pic %}
+                <form method="get" action="chat_id={{chat.id}}">
+                    <div>
+                        <a href="/chat_id={{ chat_id }}">
+                            <img src="{{ MEDIA_URL }} {{ pic.url }}"> {{ user.first_name }} {{user.second_name }}
+                        </a>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                </form>
+                {% endthumbnail %}
+                {% endfor %}
+            {% endif %}
+            <div class="messenger">
+                <div class="messenger_frame">
+                    {% for message_id, author in users_info.items %}
+                        {% thumbnail author.profile_picture "60x60" crop="center" upscale=True as pic %}
+                        <div class="message">
+                            <div class="name">
+                                <a href="/id={{author.user.id}}">
+                                    <img src="{{ MEDIA_URL }} {{ pic.url }}">  {{ author.first_name }} {{ author.second_name }}
+                                </a>
+                            </div>
+                            <div class="message_text">
+                                {{message_id.message}}
+                            </div>
+                            <div class="date"> {{message_id.pub_date}} </div>
+                        </div>
+                        <br>
+                        {% endthumbnail %}
+                    {% endfor %}
+                </div>
+                <div class="chat_form">
+                        {% thumbnail sender.profile_picture "60x60" crop="center" upscale=True as pic %}
+                        <form class="chat" method="post">
+                        {% csrf_token %}
+                        <div class="pic_border">
+                            <img src="{{ MEDIA_URL }} {{ pic.url }}" width="60" height="60"> {{ form }}
+                        </div>
+                        <br>
+                        <button> Send message </button>
+                        </form>
+                        {% endthumbnail %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

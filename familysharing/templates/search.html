@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+{% load thumbnail %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <link href='{% static "/css/base.css" %}' type="text/css" rel="stylesheet">
+</head>
+<body>
+    <div class="frame">
+        <div class="header">
+            <form class="log_out" action="{% url 'exit' %}">
+                <button type="submit" class="log_out_button">log out</button>
+            </form>
+            <div class="logo">
+                <a href="{% url 'my_page' %}">
+                    <p> Draft </p>
+                </a>
+            </div>
+        </div>
+        <div class="search_page">
+            <div class="search_form">
+                <form method="get" action="" >
+                    <input type="search" type="text" name="q" placeholder="Search other users">
+                    <button type="submit"> Search </button>
+                </form>
+                <hr>
+            </div>
+            <div class="all_users">
+                {% for user in users %}
+                {% thumbnail user.profile_picture "90x90" crop="center" upscale=True as pic %}
+                <div class="user_found"> <a href="/id={{user.user_id}}">
+                    <img src="{{ MEDIA_URL }} {{ pic.url }}"> {{user.first_name}} {{user.second_name}} </a>
+                </div>
+                {% endthumbnail %}
+                <br>
+                <hr>
+                <br>
+                {% endfor %}
+            </div>
+            <div class="search_result">
+                    {% for result in results %}
+                        {% if result is not None %}
+                        {% thumbnail result.profile_picture "90x90" crop="center" upscale=True as pic %}
+                        <div> <a href="/id={{result.user_id}}"> <img src="{{ MEDIA_URL }} {{ pic.url }}"> {{result.first_name}} {{result.second_name}}</a> </div>
+                        <br>
+                        <hr>
+                        <br>
+                        {% endthumbnail %}
+                        {% else %}
+                        <p1> Page not Found, please try another name </p1>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

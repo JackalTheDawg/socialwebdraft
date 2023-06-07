@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{% load static %}
+{% load thumbnail %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }} {{ second_name}}</title>
+    <link href='{% static "/css/base.css" %}' type="text/css" rel="stylesheet">
+</head>
+<body>
+    <div class="frame">
+        {% block mainmenu %}
+        {% if id == page_id.id %}
+            <div class="header">
+                <form class="log_out" action="{% url 'exit' %}">
+                    <button type="submit" class="log_out_button">log out</button>
+                </form>
+                <div class="logo">
+                    <a href="{% url 'my_page' %}">
+                        <p> Draft </p>
+                    </a>
+                </div>
+            </div>
+            <div class="users_data">
+                <div class="info">
+                    <p> {{name}} {{second_name}} </p>
+                    <p1> date of birthday: {{birthday}} {{birthday_month}} {{birthday_year}}</p1>
+                </div>
+                <div class="profile_picture">
+                    <img src="{{ MEDIA_URL }} {{ picture.url }}" width="220" height="220">
+                </div>
+                <div class="sidebar">
+                    <div class="buttons_borders">
+                        <form method="get" action="{% url 'search_page' %}">
+                            <button class="search">search</button>
+                        </form>
+                        <form method="get" action="{% url 'chat_list' %}">
+                            <button class="messages">messages</button>
+                        </form>
+                        <form>
+                            {% csrf_token %}
+                            <button class="settings">settings</button>
+                        </form>
+                    </div>
+                </div>
+                    <div class="content">
+                        <div class="frame_bar">Blog</div>
+                        <form class="blog_form" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form }}
+                            <br>
+                            <button method="post" class="blog_button">Send</button>
+                        </form>
+                    </div>
+                    <div class="blog">
+                        {% for post, sender in posts.items %}
+                        <div class="sender"><img src="{{ MEDIA_URL }} {{ sender.profile_picture.url }}" width="60" height="60"> {{sender.first_name}} {{sender.second_name}}</div>
+                        <br>
+                            <div class="post">
+                                {{post.blog}}
+                                {% thumbnail post.content "960x339" crop="center" upscale=True as im %}
+                                <img src="{{ MEDIA_URL }} {{ im.url }}">
+                                {% endthumbnail %}
+                                <br>{{post.date}}</br>
+                            </div>
+                        <hr>
+                        </br>
+                        {% endfor %}
+                    </div>
+            </div>
+                {% else %}
+            <div class="header">
+                <form class="log_out" action="{% url 'exit' %}">
+                    <button type="submit" class="log_out_button">log out</button>
+                </form>
+                <div class="logo">
+                    <a href="{% url 'my_page' %}">
+                        <p> Draft </p>
+                    </a>
+                </div>
+            </div>
+                <div class="users_data">
+                    <div class="info">
+                        <h1> {{name}} {{second_name}} </h1>
+                        <p1> date of birthday: {{birthday}} {{birthday_month}} {{birthday_year}}</p1>
+                    </div>
+                    <div class="profile_picture">
+                        <img src="{{ MEDIA_URL }} {{ picture.url }}" width="220" height="220">
+                    </div>
+                    <div class="sidebar">
+                        <div class="buttons_borders">
+                            <form method="get" action="{% url 'search_page' %}">
+                                <button class="search">search</button>
+                            </form>
+                            <form method="get" action="{% url 'chat_list' %}">
+                                <button class="messages">messages</button>
+                            </form>
+                            <form>
+                                {% csrf_token %}
+                                <button class="settings">settings</button>
+                            </form>
+                            <form method="get" action="create_chat={{ page_id.id }}">
+                                <button type="submit">Send message</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="frame_bar">Blog</div>
+                        <form class="blog_form" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form }}
+                            <br></br>
+                            <button method="post" class="blog_button">Send</button>
+                        </form>
+                    </div>
+                    <div class="blog">
+                        {% for post, sender in posts.items %}
+                        <div class="sender"><img src="{{ MEDIA_URL }} {{ sender.profile_picture.url }}" width="60" height="60"> {{sender.first_name}} {{sender.second_name}}</div>
+                        <br>
+                            <div class="post">
+                                {{post.blog}}
+                                {% thumbnail post.content "960x339" crop="center" upscale=True as im %}
+                                <img src="{{ MEDIA_URL }} {{ im.url }}">
+                                {% endthumbnail %}
+                                <br>{{post.date}}</br>
+                            </div>
+                        <hr>
+                        </br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% endblock %}
+                </div>
+    </div>
+</body>
+</html>

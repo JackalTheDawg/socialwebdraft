@@ -1,0 +1,184 @@
+* {
+    padding:0;
+    margin:0;
+    bottom:0;
+    border:0;
+}
+
+
+body {
+    background-color:#f0f3f6;
+    width:100vw;
+    height:100vh;
+}
+
+hr {
+    border:1px solid #cbcbcb;
+    width: 100%;
+}
+
+.frame {
+    position:relative;
+    width:90%;
+    left:5%;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    position: relative;
+    width:97%;
+	background: #79b6df;
+	height: 60px;
+	border-radius: 2em;
+	left:1.5%;
+	top:0.7px;
+}
+
+.log_out {
+    position:absolute;
+    right:5%;
+    top: 35%;
+}
+
+.log_out_button {
+    background-color:#7b6f7a00;
+    color: white;
+    width:60px;
+    height:20px;
+    border-radius:3px;
+    cursor:pointer;
+    font-size:18px;
+    text-align:center;
+
+}
+
+.logo {
+    position:absolute;
+    left:2%;
+    top:10%;
+    width:40px;
+}
+
+.logo p {
+    font-size:40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+}
+
+.logo a,.logo a:visited {
+    color: #fefffd;
+    text-decoration:None;
+    }
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items:flex-start;
+    width:80%;
+    position:relative;
+    top:30px;
+    left:10%;
+}
+
+.panel a, a:visited {
+    color: #6565a3;
+    text-decoration:none;
+
+}
+
+.panel img {
+    border-radius:8em;
+}
+
+.panel hr {
+    width:260px;
+}
+
+.messenger {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.message {
+    display: flex;
+    align-items:flex-end;
+    justify-content: space-around;
+    font-size:16px;
+    color:#000000b0;
+    width:100%;
+}
+
+.message_text {
+    position: relative;
+    font-size: 14px;
+}
+
+.date {
+    font-size: 14px;
+}
+
+.name {
+    justify-content:
+}
+
+.name a, a:visited {
+    color: #6565a3;
+    text-decoration:none;
+}
+
+.messenger hr{
+    width:100%;
+}
+
+.chat_form {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position: relative;
+    top:20px;
+}
+
+.errorlist {
+    visibility: hidden;
+}
+
+#id_message {
+    position: relative;
+    padding:5px;
+    border: 1px solid #b4bcc3;
+    outline-color:#aad3f7;
+    height: 100px;
+}
+
+.chat {
+    display: flex;
+    flex-direction:column;
+    justify-content: space-around;
+    align-items: center;
+    width:50%;
+
+}
+
+.chat button {
+    background-color:#039bff;
+    text-decoration:none;
+    cursor:pointer;
+    color:white;
+    border-radius:1em;
+    width:100px;
+    height:30px;
+}
+
+.pic_border {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.messenger_frame {
+    border:1px solid #4a3d3d59;
+
+}
